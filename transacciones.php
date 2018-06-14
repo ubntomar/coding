@@ -35,11 +35,13 @@ else    {
 	    	echo "Failed to connect to MySQL: " . $mysqli->connect_error;
 			}	
 		mysqli_set_charset($mysqli,"utf8");
+		date_default_timezone_set('America/Bogota');
 		$mons = array(1 => "Enero", 2 => "Febrero", 3 => "Marzo", 4 => "Abril", 5 => "Mayo", 6 => "Junio", 7 => "Julio", 8 => "Agosto", 9 => "Septiembre", 10 => "Octubre", 11 => "Noviembre", 12 => "Diciembre");
 		$month = date('n');
 		$month_name = $mons[$month];
 		$year=date("Y");
 		$today= date("j");
+		$hour=date("H:i");
 	?>	
 	<div class="container-fluid px-0">		
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top   ">		
@@ -101,7 +103,8 @@ else    {
 					<div class="columna col-lg-7">
 						
 						<div class="nuevo_contenido pb-2 mb-2 caja border-primary">
-							<h5 class="my-3 pb-2 caja border-primary">Transacciones HOY <?php  echo $today." ".$month_name." de ".$year; ?>.</h5>
+							<h5 class="my-3 pb-2 caja border-primary">Transacciones HOY <?php  echo $today." ".$month_name." de ".$year;echo "  -Hora:  
+							".$hour; ?>.</h5>
 							<!-- inicio de contenido de pagina -->
 							<p class="mt-3 ">Seleccione Cajero.</p>	 
 		    							<div class="my-3">
