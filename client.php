@@ -186,29 +186,30 @@ else    {
 											</select>	
 		    							</div>  
 		    							
-		    							<p class="card-text ">#. Valor de Plan.</p>
+		    							<p class="card-text ">#. Valor de Plan (Es la mensualidad que queda pagando el cliente Ojo sin  escribir puntos).</p>
 		    							<div class="my-3">
 		    							   	<input class="form-control" type="number" value="" id="valor-plan" >
 		    							</div>	
 		    							<p class="card-text ">#. Dirección ip.</p>
+
 		    							<div class="my-3">
 		    							   	<input class="form-control" type="text" value="" id="ip-address" >
 		    							</div>		
-		    							<p class="card-text mt-3 ">#. Generar Factura de inmediato ?.</p>	 
+		    							<p class="card-text mt-3 ">#. Generar Factura de inmediato ?. (Si necesito que el pago del primer mes quede aparte de lo que van a pagar de afiliación le doy sí. Entonces voy a Registrar Pago y ahí ya le aparece para que genere el primer pago de una vés.)</p>	 
 		    							<div class="my-3">
 		    								<select class="custom-select " id="generar-factura">		    								  
 											  <option value="1" >Si.</option>
 											  <option value="0" selected >No.</option>											  
 											</select>	
 		    							</div>
-		    							<p class="card-text mt-3 ">#. Standby ?.</p>	 
+		    							<p class="card-text mt-3 ">#. Paga el primer mes de servicio con lo que está pagando de afiliación? . Si no sabe , dejarlo en No.</p>	 
 		    							<div class="my-3">
 		    								<select class="custom-select " id="standby">		    								  
 											  <option value="1" >Si.</option>
 											  <option value="0" selected >No.</option>											  
 											</select>	
 		    							</div>
-		    							<p class="card-text ">#. Valor de Afiliación a servicio de Internet.</p>
+		    							<p class="card-text ">#. Valor de Afiliación a servicio de Internet. 150.000 dentro de Guamal ,180.000 rural simple ,220.000 rural complicada.</p>
 		    							<div class="my-3">
 		    							   	<input class="form-control" type="number" value="" id="valorAfiliacion" >
 		    							</div>   	
