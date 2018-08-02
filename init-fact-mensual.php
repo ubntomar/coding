@@ -29,7 +29,7 @@ if ($result = $mysqli->query($sql)) {
 		$fechap=$row["ultimopago"];
 		$mes=["","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 		$monthn = date("n");//******************IMPORTANTE****Y REVISAR LOS STAND BY*****************************************---------
-		$periodo=$mes[7];// aqui pongo el mes al que le voy a crear la tanda de facturas a todos los afiliados.
+		$periodo=$mes[8];// hoy 01 de Agosto de 2018 aqui pongo el mes al que le voy a crear la tanda de facturas a todos los afiliados.
 		if($vencidos==-1){//********************************************//*********************************-----
 			$makeFact=0;
 			
