@@ -241,7 +241,8 @@ else    {
 												</tr>
 											</tfoot>
 											<tbody >										
-										<?php 					
+										<?php 
+											$contPago=0;					
 											$sql = "SELECT * FROM `afiliados` WHERE activo=1 AND suspender=0 ORDER BY `id` DESC ";
 											if ($result = $mysqli->query($sql)) {
 												while ($row = $result->fetch_assoc()) {
@@ -250,6 +251,7 @@ else    {
 													$direccion=$row["direccion"];
 													$corte=$row["corte"];
 													$pago=$row["pago"];
+													$contPago+=$pago;
 													$velocidad=$row["velocidad-plan"]." Megas";
 													$activo=$row["activo"];
 													$ip=$row["ip"];
@@ -270,6 +272,7 @@ else    {
 										?>		
 											</tbody>
 										</table>
+										<h1>Recaudo estimado Agosto : <?php echo " $ $contPago"; ?> </h1>
 										<hr>
 										<hr>
 										<h4 class="card-title mt-4">Lista de Clientes en <strong> SUSPENSIÓN</strong> </h4>	
