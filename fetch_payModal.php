@@ -57,10 +57,12 @@ if($_POST['rowid']) {
 			          		<td>Direccion:</td><td>".$row["direccion"]."</td>
 			          	</tr>
 			          	<tr>";
-			$sql = "SELECT * FROM `factura`  WHERE `factura`.`id-afiliado`='$id'   ORDER BY `factura`.`id-factura` DESC";
+			$sql = "SELECT * FROM `factura`  WHERE `factura`.`id-afiliado`='$id' AND `factura`.`cerrado`=1   ORDER BY `factura`.`id-factura` DESC";
+			//echo $sql;
 			if($result = $mysqli->query($sql)){
 				$rowf = $result->fetch_assoc();  
 				$idFactura=$rowf["id-factura"];	
+				$periodo=$rowf["periodo"];	
 				}
 			else{
 				echo "Error:".$mysqli->error;
@@ -68,11 +70,14 @@ if($_POST['rowid']) {
 				}				
 			$result->free();
 			$sql = "SELECT * FROM `recaudo` WHERE `idfactura` = $idFactura ORDER BY `idrecaudo` DESC ";
+			//echo $sql;
 			if($result = $mysqli->query($sql)){
 				if($rowf = $result->fetch_assoc()){
 					$pagoAnterior=$rowf["fecha-hoy"];
+					$pagado=$rowf["valorp"];
+					$abonado=$rowf["abonar"];
 					$formatted_date = date('d-m-Y', strtotime($pagoAnterior));
-					$varHtml.="<td>Pago Anterior:</td><td>$formatted_date</td>"; 	
+					$varHtml.="<td>Pago Anterior:</td><td>$formatted_date  ($periodo-Pagó:$pagado-Abonó:$abonado)</td>"; 	
 					}
 				else{
 					$varHtml.="<td>Pago Anterior:</td><td>00/00/0000</td>"; 	
