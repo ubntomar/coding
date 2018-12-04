@@ -76,8 +76,9 @@ if($_POST['rowid']) {
 					$pagoAnterior=$rowf["fecha-hoy"];
 					$pagado=$rowf["valorp"];
 					$abonado=$rowf["abonar"];
+					$vendedor=$rowf["vendedor"];
 					$formatted_date = date('d-m-Y', strtotime($pagoAnterior));
-					$varHtml.="<td>Pago Anterior:</td><td>$formatted_date  ($periodo-Pagó:$pagado-Abonó:$abonado)</td>"; 	
+					$varHtml.="<td class=\"small\">Pago Anterior:</td><td class=\"small\">$formatted_date  ($periodo-Pagó:$pagado-Abonó:$abonado--$vendedor)</td>"; 	
 					}
 				else{
 					$varHtml.="<td>Pago Anterior:</td><td>00/00/0000</td>"; 	
