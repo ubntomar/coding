@@ -51,7 +51,7 @@ if($_POST['rowid']) {
 					  		<td><small>Cod. Cliente:</small></td><td><small>017000</small><small  id=\"id-client\">".$id."</small></td>
 						</tr>
 						<tr>
-					  		<td>Cliente:</td><td>".$row["cliente"]."</td>
+					  		<td>Cliente:</td><td>".$row["cliente"]."  ".$row["apellido"]."</td>
 						</tr>
 						<tr>
 			          		<td>Direccion:</td><td>".$row["direccion"]."</td>
@@ -62,33 +62,44 @@ if($_POST['rowid']) {
 			if($result = $mysqli->query($sql)){
 				$rowf = $result->fetch_assoc();  
 				$idFactura=$rowf["id-factura"];	
-				$periodo=$rowf["periodo"];	
+				$periodo=$rowf["periodo"];
+				if($idFactura)
+					$fl=1;
+				else
+					$fl=0;		
+				//echo "flag =1 pero idfsctura es:$idFactura";
 				}
 			else{
 				echo "Error:".$mysqli->error;
 				$idFactura=0;
+				
 				}				
 			$result->free();
 			$sql = "SELECT * FROM `recaudo` WHERE `idfactura` = $idFactura ORDER BY `idrecaudo` DESC ";
 			//echo $sql;
-			if($result = $mysqli->query($sql)){
-				if($rowf = $result->fetch_assoc()){
-					$pagoAnterior=$rowf["fecha-hoy"];
-					$pagado=$rowf["valorp"];
-					$abonado=$rowf["abonar"];
-					$vendedor=$rowf["vendedor"];
-					$formatted_date = date('d-m-Y', strtotime($pagoAnterior));
-					$varHtml.="<td class=\"small\">Pago Anterior:</td><td class=\"small\">$formatted_date  ($periodo-Pagó:$pagado-Abonó:$abonado--$vendedor)</td>"; 	
-					}
-				else{
-					$varHtml.="<td>Pago Anterior:</td><td>00/00/0000</td>"; 	
-					}	 
-				
+			if($fl==1){
+					
+					if($result = $mysqli->query($sql)){
+						if($rowf = $result->fetch_assoc()){
+							$pagoAnterior=$rowf["fecha-hoy"];
+							$pagado=$rowf["valorp"];
+							$abonado=$rowf["abonar"];
+							$vendedor=$rowf["vendedor"];
+							$formatted_date = date('d-m-Y', strtotime($pagoAnterior));
+							$varHtml.="<td class=\"small\">Pago Anterior:</td><td class=\"small\">$formatted_date  ($periodo-Pagó:$pagado-Abonó:$abonado--$vendedor)</td>"; 	
+							}
+						else{
+							$varHtml.="<td>Pago Anterior:</td><td>00/00/0000</td>"; 	
+							}	 
+						
+						}
+					else{
+						echo "Error:".$mysqli->error;	
+						}	
 				}
-			else{
-				echo "Error:".$mysqli->error;	
-				}	
-			
+			if($fl==0){
+				$varHtml.="<td>Pago Anterior:</td><td>No se ha registrado  pagos.</td>"; 	
+			}
 			$result->free();         	
 			          	
 			$varHtml.="  </tr>
