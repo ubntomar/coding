@@ -45,7 +45,8 @@ if($_POST['rowid']) {
 				$multiplicador=1;
 			else
 				$multiplicador=$row["mesenmora"];
-
+			$registration=$row["registration-date"];
+			$corte=$row["corte"];
 			$varHtml="<table class=\"table\">
 						<tr>
 					  		<td><small>Cod. Cliente:</small></td><td><small>017000</small><small  id=\"id-client\">".$id."</small></td>
@@ -57,7 +58,7 @@ if($_POST['rowid']) {
 			          		<td>Direccion:</td><td>".$row["direccion"]."</td>
 			          	</tr>
 			          	<tr>";
-			$sql = "SELECT * FROM `factura`  WHERE `factura`.`id-afiliado`='$id' AND `factura`.`cerrado`=1   ORDER BY `factura`.`id-factura` DESC";
+			$sql = "SELECT * FROM `factura`  WHERE `factura`.`id-afiliado`='$id' AND `factura`.`fecha-pago`!= '0000-00-00'   ORDER BY `factura`.`id-factura` DESC";
 			//echo $sql;
 			if($result = $mysqli->query($sql)){
 				$rowf = $result->fetch_assoc();  
@@ -76,7 +77,7 @@ if($_POST['rowid']) {
 				}				
 			$result->free();
 			$sql = "SELECT * FROM `recaudo` WHERE `idfactura` = $idFactura ORDER BY `idrecaudo` DESC ";
-			//echo $sql;
+			//echo "<br>".$sql;
 			if($fl==1){
 					
 					if($result = $mysqli->query($sql)){
@@ -98,7 +99,7 @@ if($_POST['rowid']) {
 						}	
 				}
 			if($fl==0){
-				$varHtml.="<td>Pago Anterior:</td><td>No se ha registrado  pagos.</td>"; 	
+				$varHtml.="<td class=\"small\">Pago Anterior:</td><td>Ninguno. Afiliación:$registration Corte:$corte</td>"; 	
 			}
 			$result->free();         	
 			          	
@@ -107,7 +108,7 @@ if($_POST['rowid']) {
 			          		<td>Hoy:</td><td>".$convertdate."</td>
 			          	</tr>
 			          	<tr>
-			          		<td>Plan:</td><td>".$row["velocidad-plan"]."</td>
+			          		<td>Plan:</td><td>".$row["velocidad-plan"]." Megas.</td>
 			          	</tr>
 			          	<tr>
 			          		<td>Valor Plan:</td><td>$".number_format($row["pago"])."</td>
