@@ -29,7 +29,7 @@ if ($result = $mysqli->query($sql)) {
 		$fechap=$row["ultimopago"];
 		$mes=["","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 		$monthn = date("n");//******************IMPORTANTE****Y REVISAR LOS STAND BY*****************************************---------
-		$periodo=$mes[12];// hoy 01 de Diciembre  de 2018 aquí pongo el mes al que le voy a crear la tanda de facturas a todos los afiliados.
+		$periodo=$mes[3];// hoy 01 de Marzo  de 2019 aquí pongo el mes al que le voy a crear la tanda de facturas a todos los afiliados.
 		if($vencidos==-1){//********************************************//*********************************-----
 			$makeFact=0;
 
@@ -40,9 +40,9 @@ if ($result = $mysqli->query($sql)) {
 
 		$sql1 = "INSERT INTO `redesagi_facturacion`.`factura` (`id-factura`, `id-afiliado`, `fecha-pago`, `iva`, `notas`, `descuento`, `valorf`, `valorp`, `saldo`, `cerrado`, `fecha-cierre`, `vencidos`, `periodo`) VALUES (NULL,'$idafiliado', '0000/00/00', '19', 'notas', '0', '$valorf', '0', '$saldo', '0', '0000/00/00', '-10', '$periodo');";
 
-		//echo "<br>".$sql1."<br>";
+		echo "<br>".$sql1."<br>";
 		
-		//$mysqli->query($sql1);
+		$mysqli->query($sql1);
 		}
     	$result->free();
 	}
