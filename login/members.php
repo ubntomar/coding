@@ -23,10 +23,10 @@ exit;
 
 
 <?php
-header("Location: ../main.php"); /* Redirect browser */
-
+//header("Location: ../main.php"); /* Redirect browser */
+dfsdg
 /* Make sure that code below does not get executed when we redirect. */
-exit;
+//exit;
 ?>	
 	
 	
@@ -49,7 +49,7 @@ exit;
     </div>
     <form class="form-horizontal" id="login_form">
          <h2><?php echo "hi ".$_SESSION['username']; ?></h2>
-		 <h2>You are now logged in </h2>
+		 <h2>You are now logged in <?php echo "hi url: ".$_SESSION['urlsource']; ?></h2>
 
         <div class="line"></div>
         

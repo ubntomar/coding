@@ -42,7 +42,7 @@ if ($result = $mysqli->query($sql)) {
 
 		echo "<br>".$sql1."<br>";
 		
-		$mysqli->query($sql1);
+		//$mysqli->query($sql1);
 		}
     	$result->free();
 	}

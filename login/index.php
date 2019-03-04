@@ -31,7 +31,7 @@ session_destroy();
                                      <h2><?php include('db.php'); echo $logotxt; ?></h2>
                                 </div>
                                 <form class="form-horizontal" id="login_form">
-                                     <h2>Area de acceso</h2>
+                                     <h2>Area de acceso test</h2>
 
                                     <div class="line"></div>
                                     <div class="form-group">
