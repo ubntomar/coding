@@ -3,7 +3,7 @@ session_start();
 session_destroy();
 ?><!DOCTYPE html>
 <head>
-    <title>Wisdev-Administrador ISP</title>
+    <title>Wisdev-Administrador ISP testt </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 
     <!-- Bootstrap -->
@@ -31,7 +31,7 @@ session_destroy();
                                      <h2><?php include('db.php'); echo $logotxt; ?></h2>
                                 </div>
                                 <form class="form-horizontal" id="login_form">
-                                     <h2>Area de acceso test</h2>
+                                     <h2>Area de acceso dsadad</h2>
 
                                     <div class="line"></div>
                                     <div class="form-group">
