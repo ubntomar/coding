@@ -2,10 +2,12 @@
 session_start();
 if ( !isset($_SESSION['login']) || $_SESSION['login'] !== true) 
 		{
-        $urlSource=$_SERVER['REQUEST_URI'];
-        $_SESSION['urlsource']=$urlSource;    
+        $urlSource=$_SERVER["PHP_SELF"];
+        ///ispdev/MktikMangle.php
+        $page=explode("/",$urlSource);
+        $_SESSION['urlsource']= $page[2];    
 		header('Location: login/index.php');
-		exit;
+	exit;
 		}
 else    {
         $user=$_SESSION['username'];
@@ -23,16 +25,17 @@ else    {
 <body>
 <?php
 echo "<h1>$urlSource</h1>";
-$AddressList="servipetroleos-250";
-$Text_comment="1.250";
-$markConnectionDownloadText="_250_dw_conn";
-$markConnectionUploadText="_250_up_conn";
-$markPacketDownloadText="_250_dw_pkg";
-$markPacketUploadText="_250_up_pkg";
-$markConnectionRestoDownloadText="resto_dw_250_conn";
-$markPacketRestoDownloadText="resto_dw_250_pkg";
-$markConnectionRestoUploadText="resto_up_250_conn";
-$markPacketRestoUploadText="resto_up_250_pkg";
+$ipPc="250";
+$AddressList="servipetroleos-$ipPc"."";
+$Text_comment="1.$ipPc"."";
+$markConnectionDownloadText="_$ipPc"."_dw_conn";
+$markConnectionUploadText="_$ipPc"."_up_conn";
+$markPacketDownloadText="_$ipPc"."_dw_pkg";
+$markPacketUploadText="_$ipPc"."_up_pkg";
+$markConnectionRestoDownloadText="resto_dw_$ipPc"."_conn";
+$markPacketRestoDownloadText="resto_dw_$ipPc"."_pkg";
+$markConnectionRestoUploadText="resto_up_$ipPc"."_conn";
+$markPacketRestoUploadText="resto_up_$ipPc"."_pkg";
 echo"Arranca<p>";
 echo "        
     \n<p>add action=mark-connection chain=forward comment=\
@@ -73,6 +76,41 @@ echo "
 
 echo"</p>Termina";
 
+// A continuación un plan de 8 megas para 20 usuarios en servipetróleos.  20 Usuarios/8 Megas =2.5 User x Mega ó 0.4M por Usuario Garantízado.
+$grupoDescripcion="Grupo 8/4 Megas";
+$ip="192.168.".$Text_comment;
+
+$grupoBajadaLimitAt="8M";
+$youtubeLimitAtBajada="50k";
+$facebookLimitAtBajada="50k";
+$restoLimitAtBajada="300k";
+$youtubeMaxLimitBajada="1M";
+$facebookMaxLimitBajada="1M";
+$restoMaxLimitBajada="6M";
+
+$grupoSubidaLimitAt="4M";
+$youtubeLimitAtSubida="50k";
+$facebookLimitAtSubida="50k";
+$restoLimitAtSubida="100k";
+$youtubeMaxLimitSubida="1M";
+$facebookMaxLimitSubida="1M";
+$restoMaxLimitSubida="2M";
+
+$restodwName="resto_$ipPc"."_dw";
+$restoUpName="resto_$ipPc"."_up";
+echo"Arranca<p>";
+echo"\n<p>/queue tree
+\n<p>add comment=$ip limit-at=8M max-limit=8M name=\"$grupoDescripcion Dw\" parent=global
+\n<p>add limit-at=$youtubeLimitAtBajada max-limit=$youtubeMaxLimitBajada name=\"$Text_comment youtube dw\" packet-mark=youtube$markPacketDownloadText parent=\"$grupoDescripcion Dw\"
+\n<p>add limit-at=$facebookLimitAtBajada max-limit=$facebookMaxLimitBajada name=\"$Text_comment facebook dw\" packet-mark=facebook$markPacketDownloadText parent=\"$grupoDescripcion Dw\"
+\n<p>add limit-at=$restoLimitAtBajada max-limit=$restoMaxLimitBajada name=$restodwName packet-mark=$markPacketRestoDownloadText parent=\"$grupoDescripcion Dw\"
+
+\n<p>add comment=$ip limit-at=4M max-limit=4M name=\"$grupoDescripcion Up\" parent=global
+\n<p>add limit-at=50k max-limit=1M name=\"$Text_comment youtube up\" packet-mark=youtube$markPacketUploadText parent=\"$grupoDescripcion Up\"
+\n<p>add limit-at=50k max-limit=1M name=\"$Text_comment facebook up\" packet-mark=facebook$markPacketUploadText parent=\"$grupoDescripcion Up\"
+\n<p>add limit-at=100k max-limit=2M name=$restoUpName packet-mark=$markPacketRestoUploadText parent=\"$grupoDescripcion Up\"
+";
+echo"</p>Termina";
  ?>
 </body>
 </html>

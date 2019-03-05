@@ -1,7 +1,5 @@
 <?php 
 session_start();
-
-
 if ( !isset($_SESSION['login']) || $_SESSION['login'] !== true) {
 
 if(empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])){
@@ -23,10 +21,15 @@ exit;
 
 
 <?php
-//header("Location: ../main.php"); /* Redirect browser */
-dfsdg
+$urlprev=$_GET['urlprev'];
+if($urlprev) 
+    $urltext="Location: ../$urlprev";
+else 
+    $urltext="Location: ../main.php";     
+header($urltext); /* Redirect browser */
+
 /* Make sure that code below does not get executed when we redirect. */
-//exit;
+exit;
 ?>	
 	
 	
@@ -49,7 +52,7 @@ dfsdg
     </div>
     <form class="form-horizontal" id="login_form">
          <h2><?php echo "hi ".$_SESSION['username']; ?></h2>
-		 <h2>You are now logged in <?php echo "hi url: ".$_SESSION['urlsource']; ?></h2>
+		 <h2>You are now logged in <?php echo "hi url: $urlprev"; ?></h2>
 
         <div class="line"></div>
         

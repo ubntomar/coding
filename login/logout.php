@@ -41,4 +41,4 @@ if ($_SESSION['token']) {
 
 session_start();
 session_destroy();
-header('Location: indexx.php');
+header('Location: index.php');

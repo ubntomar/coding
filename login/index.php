@@ -1,5 +1,6 @@
 <?php
 session_start();
+$urlprev=$_SESSION['urlsource'];
 session_destroy();
 ?><!DOCTYPE html>
 <head>
@@ -151,7 +152,7 @@ onfocusout: false,
 							
                                 $('#login_form').fadeOut(5000);
 								//$("button").button('reset');
-                                window.location = "members.php"
+                                window.location = "members.php?urlprev=<?php echo $urlprev; ?>";
                             } else {	
 							$("button").button('reset');
 							console.log(msg.result);
