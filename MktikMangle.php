@@ -27,7 +27,7 @@ else    {
 echo "<h1>$urlSource</h1>";
 $c=0;
 $lanInterfaceName="bridge1";//put somethink like ether1 |  lan | ...
-for($x=230;$x<=250;$x++)
+for($x=235;$x<=254;$x++)
         {   $c+=1;
             $text="";
             $ipPc=$x;
@@ -105,10 +105,16 @@ for($x=230;$x<=250;$x++)
 
             $restodwName="$Text_comment".".resto_$ipPc"."_dw";
             $restoUpName="$Text_comment".".resto_$ipPc"."_up";
-            
+            $priorityDownload="priority=5";
+            $queuePcq="queue=\"$grupoDescripcion\"";
+            if($c==1){
+                echo"\n<p>/queue type
+                \n<p>add kind=pcq name=\"$grupoDescripcion\" pcq-classifier=dst-address \
+                    pcq-dst-address6-mask=64 pcq-rate=0 pcq-src-address6-mask=64";
+            }
             echo"\n<p>/queue tree";
             if($c==1){
-                echo"\n<p>add comment=\"$grupoDescripcion\" limit-at=$grupoBajadaLimitAt max-limit=$grupoBajadaMaxLimit name=\"$grupoDescripcion Dw\" parent=global";
+                echo"\n<p>add comment=\"$grupoDescripcion\" $queuePcq limit-at=$grupoBajadaLimitAt max-limit=$grupoBajadaMaxLimit name=\"$grupoDescripcion Dw\" parent=global";
             }
             
             $text="comment=\"$ip\"";    
@@ -116,7 +122,7 @@ for($x=230;$x<=250;$x++)
             echo"
             \n<p>add limit-at=$facebookLimitAtBajada $text max-limit=$facebookMaxLimitBajada name=\"$Text_comment facebook dw\" packet-mark=facebook$markPacketDownloadText parent=\"$grupoDescripcion Dw\"
             \n<p>add limit-at=$youtubeLimitAtBajada  max-limit=$youtubeMaxLimitBajada name=\"$Text_comment youtube dw\" packet-mark=youtube$markPacketDownloadText parent=\"$grupoDescripcion Dw\"
-            \n<p>add limit-at=$restoLimitAtBajada max-limit=$restoMaxLimitBajada name=\"$restodwName\" packet-mark=$markPacketRestoDownloadText parent=\"$grupoDescripcion Dw\" ";
+            \n<p>add limit-at=$restoLimitAtBajada $priorityDownload max-limit=$restoMaxLimitBajada name=\"$restodwName\" packet-mark=$markPacketRestoDownloadText parent=\"$grupoDescripcion Dw\" ";
 
             if($c==1)
                 echo"\n<p>add comment=\"$grupoDescripcion\" limit-at=$grupoSubidaLimitAt max-limit=$grupoSubidaMaxLimit name=\"$grupoDescripcion Up\" parent=global";
