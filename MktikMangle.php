@@ -26,12 +26,11 @@ else    {
 <?php
 echo "<h1>$urlSource</h1>";
 $c=0;
-$lanInterfaceName="bridge1";//put somethink like ether1 |  lan | ...
+$lanInterfaceName="LAN";//put somethink like ether1 |  lan | ...
 for($x=235;$x<=254;$x++)
         {   $c+=1;
             $text="";
-            $ipPc=$x;
-
+            $ipPc=$x;            
             $AddressList="servipetroleos-$ipPc"."";
             $Text_comment="1.$ipPc"."";
             $markConnectionDownloadText="_$ipPc"."_dw_conn";
